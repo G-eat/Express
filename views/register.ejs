@@ -1,0 +1,58 @@
+<% include include/header %>
+  <% if (success) { %>
+    <div class="container">
+      <h1>You are logged in</h1>
+    </div>
+  <% } else { %>
+    <div class="container">
+      <br>
+
+      <% if (message) { %>
+        <ul>
+          <% if (!alert) { %>
+            <li class="card-panel red lighten-2"><%= message %></li>
+          <% } else if (alert) {%>
+            <li class="card-panel green lighten-2"><%= message %></li>
+          <% } %>
+        </ul>
+      <% } %>
+
+      <h3><%= title %></h3>
+      <br>
+      <form class="col s12" action="/register" method="post">
+        <div class="row">
+          <div class="input-field">
+            <i class="material-icons prefix">email</i>
+            <input id="email" type="email" name='email' required>
+            <label for='email'>Email</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="username" type="text" class="validate" name='username' required minlength="4" data-length="20">
+            <label for='username'>Username</label>
+            <span class="helper-text" data-error="Wrong" data-success="Right">Username need to have 4-20 characters.</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <i class="material-icons prefix">extension</i>
+            <input id="password" type="password" class="validate" name='password' required minlength="8" data-length="30">
+            <label for='password'>Password</label>
+            <span class="helper-text" data-error="Wrong" data-success="Right">Password need to have at least 8 characters.</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <i class="material-icons prefix">copyright</i>
+            <input id="confirmpassword" type="password" data-length="20" name='confirmpassword' required>
+            <label for='confirmpassword'>Confirm Password</label>
+            <br><br>
+            <button class="btn waves-effect waves-light" type="submit" name="button">Register</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  <% } %>
+<% include include/footer %>

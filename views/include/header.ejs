@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Express</title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.materialboxed').materialbox();
+    });
+  </script>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrapper container">
+      <a href="/" class="brand-logo"><i class="material-icons">cloud</i>Logo</a>
+      <ul class="right hide-on-med-and-down">
+
+        <% if ( success ) { %>
+          <% if (page_name==='individualPost' ){ %>
+            <li class="active"><a href="#"><i class="material-icons">home</i></a></li>
+            <% } %>
+
+              <li <% if (page_name==='posts' ) { %>class="active"
+                <% } %>><a href="/posts"><i class="material-icons">view_module</i></a></li>
+              <li <% if (page_name==='index' ) { %>class="active"
+                <% } %>><a href="/createPost"><i class="material-icons">create</i></a></li>
+              <li<% if (!page_name) {%>class="active"
+                <% } %>><a href="/logout"><i class="material-icons">not_interested</i></a></li>
+                  <% } else { %>
+                    <form class="col s12" action="/loggin" method="post">
+                      <div class="row">
+                        <div class="input-field col s4">
+                          <input id="userName" type="text" name='userName' required>
+                          <label style="color:black;" for='userName'>Username</label>
+                        </div>
+                        <div class="input-field col s4">
+                          <input id="passWord" type="password" name='passWord' required>
+                          <label for='passWord' style="color:black;">Password</label>
+                        </div>
+                        <div class="col s4">
+                          <button class="btn blue-grey lighten-5 blue-text  waves-effect waves-light" type="submit" name="button">Log In</button>
+                        </div>
+                      </div>
+                    </form>
+                    <% } %>
+      </ul>
+    </div>
+  </nav>

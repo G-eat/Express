@@ -1,0 +1,47 @@
+<% include include/header %>
+<% if (!success) { %>
+  <div class="container">
+    <h4>Please Log In or <a href="/">Register</a>.</h4>
+  </div>
+<% } else { %>
+    <br>
+    <div class="container">
+      <ul class="collection with-header">
+        <li class="collection-header center-align red-text"><h4><%= post.title %></h4></li><br>
+        <img src="../<%= post.photo %>" alt="Post Image" class="responsive-img collection-item materialboxed" style="margin-left: auto;margin-right: auto;width: 66%;background-color: #eaedf2">
+        <br>
+        <li class="collection-item" style=''><%= post.body %><br><br></li>
+        <li class="collection-item">Created at : <span class='red-text'><%= post.created_at.toLocaleString() %></span> by <span style="color:#757575"><%= post.user_name %></span></li>
+        <li class='collection-item'><a href="/posts"><i class="tiny material-icons">keyboard_backspace</i> Go Back</a></li>
+      </ul>
+      <br><br>
+      <ul class="collection with-header">
+        <li class="collection-header center-align orange-text"><h6>Comment.</h6></li><br>
+        <li class="collection-item">
+          <form class="col s12" action="/comments" method="post">
+            <input type="hidden" name="postID" value='<%= post._id %>'>
+            <div class='row' >
+              <div class="input-field">
+                <input id="comments" name='comment' type="text" class="materialize-textarea validate" required minlength="1" data-length="100">
+                <label for="comments">Comment</label>
+                <span class="helper-text" data-error="Wrong" data-success="Right">Comment can't have more than 100 characters.</span>
+                <br><br>
+                <button class="btn waves-effect waves-light" type="submit" name="button">Submit</button>
+              </div>
+          </form>
+        </li>
+        <li class="collection-item blue-text center-align">All Comments</li>
+        <% comments.forEach(comment =>{ %>
+          <li class="collection-item">
+              <%= comment.comment %><span><a href='/deletecommment/<%= comment._id %>/<%= post._id %>' class='right btn red accent-4 btn-small btn-floating'><i class="material-icons">delete</i></a></span>
+              <h6 style="color:#757575;font-size: 0.9em;"><%= comment.user_name %> - <%= comment.created_at.toDateString() %></h6>
+        <% }) %>
+      </li>
+      </ul>
+      <br>
+      <a href="/posts" class='btn waves-effect waves-light blue lighten-2'><i class="tiny material-icons">keyboard_backspace</i> Go back</a>
+      <a href='/delete/<%= post._id %>' class='waves-effect waves-light btn-small red accent-4 right'><i class="material-icons">delete</i>Delete</a>
+    </div>
+    <br><br>
+  <% } %>
+<% include include/footer %>

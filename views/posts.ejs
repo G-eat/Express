@@ -1,0 +1,19 @@
+<% include include/header %>
+  <% if (!success) { %>
+    <div class="container">
+      <h4>Please Log In or <a href="/">Register</a>.</h4>
+    </div>
+  <% } else { %>
+    <div class="container">
+      <h3><%= title %></h3>
+      <div class='collection'>
+        <% posts.forEach(post =>{ %>
+          <div class='collection-item'>
+            <a href='/post/<%= post._id %>' class=''><%= post.title %></a>
+            <a href='/delete/<%= post._id %>' class='right btn red accent-4 btn-small btn-floating'><i class="material-icons">delete</i></a>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  <% } %>
+<% include include/footer %>
